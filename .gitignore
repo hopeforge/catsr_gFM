@@ -1,0 +1,10 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/slncpj/.vs/slncpj
+/.vs
+/cpj.portal/.vs/cpj.portal
+/cpj.portal/cpj.portal/obj
+/cpj.portal/cpj.portal/bin/Debug/netcoreapp3.1
+/slncpj/cpj/bin/Debug/netcoreapp3.1

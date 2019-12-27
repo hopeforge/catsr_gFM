@@ -1,0 +1,180 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>cpj</name>
+    </assembly>
+    <members>
+        <member name="T:cpj.Controllers.ContaController">
+            <summary>
+            Contas cadatradas em portais da justiça brasileira.
+            </summary>
+        </member>
+        <member name="M:cpj.Controllers.ContaController.CadastrarConta(cpj.Entities.Conta)">
+            <summary>
+            Método para cadastrar nova conta em algum portal.
+            </summary>
+            <param name="conta"></param>
+            <returns></returns>
+        </member>
+        <member name="M:cpj.Controllers.ContaController.ConsultarTodasContas(System.Int32)">
+            <summary>
+            Método para resgatar contas cadastradas em portais.
+            </summary>
+            <param name="conta"></param>
+            <returns></returns>
+        </member>
+        <member name="M:cpj.Controllers.ContaController.ConsultarPorPortal(System.Int32,System.Int32)">
+            <summary>
+            Método para resgatar contas cadastradas em portais.
+            </summary>
+            <param name="conta"></param>
+            <returns></returns>
+        </member>
+        <member name="M:cpj.Controllers.DataController.BuscarDadoJuizValorAcao">
+            <summary>
+            Método usado para buscar dados da base sobre Juiz x valor da ação
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:cpj.Controllers.DataController.BuscarDadoEmpresaValorAcao">
+            <summary>
+            Método usado para buscar dados da base sobre Empresa x valor da ação
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:cpj.Controllers.MovimentacaoController.CadastrarMovimentacao(cpj.Entities.Movimentacao)">
+            <summary>
+            Método para cadastrar movimentacao do processo.
+            </summary>
+            <param name="movimentacao"></param>
+            <returns></returns>
+        </member>
+        <member name="M:cpj.Controllers.MovimentacaoController.BuscarPorProcesso(System.Int32)">
+            <summary>
+            Busca pelo id do processo.
+            </summary>
+            <param name="idProcesso"></param>
+            <returns></returns>
+        </member>
+        <member name="M:cpj.Controllers.PeticaoController.CadastrarPeticao(cpj.Entities.Peticao)">
+            <summary>
+            Método para cadastrar peticao do processo.
+            </summary>
+            <param name="peticao"></param>
+            <returns></returns>
+        </member>
+        <member name="M:cpj.Controllers.PeticaoController.BuscarPorProcesso(System.Int32)">
+            <summary>
+            Busca pelo id do processo.
+            </summary>
+            <param name="idProcesso"></param>
+            <returns></returns>
+        </member>
+        <member name="T:cpj.Controllers.PortalController">
+            <summary>
+            Portais cadastrados préviamente no sistema
+            </summary>
+        </member>
+        <member name="M:cpj.Controllers.PortalController.CadastrarPortal(cpj.Entities.Portal)">
+            <summary>
+            Método para cadastrar novo portal.
+            </summary>
+            <param name="portal"></param>
+            <returns></returns>
+        </member>
+        <member name="M:cpj.Controllers.PortalController.BuscarTodos">
+            <summary>
+            Método para retornar todas os portais.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:cpj.Controllers.PortalController.BuscarPorId(System.Int32)">
+            <summary>
+            Método para retornar portal por id.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:cpj.Controllers.ProcessoController.CadastrarProcesso(cpj.Entities.Processo)">
+            <summary>
+            Método para cadastrar processo na base
+            </summary>
+            <param name="processo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:cpj.Controllers.ProcessoController.BuscaPorRequerente(System.String)">
+            <summary>
+            Executa busca por requerente
+            </summary>
+            <param name="requerente"></param>
+            <returns></returns>
+        </member>
+        <member name="M:cpj.Controllers.ProcessoController.BuscaPorRequerido(System.String)">
+            <summary>
+            Executa busca por Requerido
+            </summary>
+            <param name="requerido"></param>
+            <returns></returns>
+        </member>
+        <member name="M:cpj.Controllers.ProcessoController.BuscaTodos">
+            <summary>
+            Busca todos os processos da base.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:cpj.Controllers.ProcessoController.Get(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:cpj.Controllers.ProcessoController.Favoritar(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:cpj.Controllers.UsuarioController">
+            <summary>
+            Controller de usuário do sistema
+            </summary>
+        </member>
+        <member name="M:cpj.Controllers.UsuarioController.CadastrarUsuario(cpj.Entities.Usuario)">
+            <summary>
+            Método para cadastrar usuário na base.
+            </summary>
+            <param name="usuario"></param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:cpj.Controllers.UsuarioController.ValidaUsuario(cpj.Entities.Usuario)" -->
+        <member name="M:cpj.Controllers.UsuarioController.Get(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:cpj.Controllers.UsuarioController.Put(cpj.Entities.Usuario)">
+            <summary>
+            
+            </summary>
+            <param name="usuario"></param>
+            <returns></returns>
+        </member>
+        <member name="T:cpj.Entities.Conta">
+            <summary>
+            Conta cadastrada em portais da justiça brasileira.
+            </summary>
+        </member>
+        <member name="T:cpj.Entities.Processo">
+            <summary>
+            Classe com detalhes de processos capturados.
+            </summary>
+        </member>
+        <member name="T:cpj.Entities.Usuario">
+            <summary>
+            Classe do usuário do sistema
+            </summary>
+        </member>
+    </members>
+</doc>

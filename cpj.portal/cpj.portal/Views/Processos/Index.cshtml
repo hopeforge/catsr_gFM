@@ -1,0 +1,71 @@
+﻿@model List<cpj.portal.Models.ProcessosViewModel>
+@{
+    ViewData["Title"] = "Processos";
+    ViewData["ExibeBusca"] = 1;
+    ViewData["exibeHeader"] = "n";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Basic Table -->
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2>
+                    Processos
+                    <small>Lista de processos atualizada. </small>
+                </h2>
+                <ul class="header-dropdown m-r--5">
+                    <li class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="material-icons">more_vert</i>
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a href="javascript:void(0);">Atualizar base</a></li>
+                            <li><a href="javascript:void(0);">Filtrar registros</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="body table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Número</th>
+                            <th>Requerido</th>
+                            <th>Valor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr style="cursor:pointer" onclick="Visualizar(@item.ID)">
+                                <th scope="row"> @Html.DisplayFor(modelItem => item.ID)</th>
+                                <td> @Html.DisplayFor(modelItem => item.Numero)</td>
+                                <td> @Html.DisplayFor(modelItem => item.Requerido)</td>
+                                <td> @Html.DisplayFor(modelItem => item.Valor, "R$ ##.###,00")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #END# Basic Table -->
+
+@section Scripts{
+    
+    <script>
+        if (!sessionStorage['usuarioLogado'] && !sessionStorage['usuarioEmail'])
+        {         
+            sessionStorage["acessoNegado"] = 1;
+            window.location.href = '@Url.Content("~/Acesso/Index")';
+        }        
+
+        function Visualizar(id) {
+            window.location.href = '@Url.Content("~/Processos/Visualizar?id=")' + id;
+        }
+    </script>
+}

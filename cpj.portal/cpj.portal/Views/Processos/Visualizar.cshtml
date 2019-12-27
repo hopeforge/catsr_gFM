@@ -1,0 +1,294 @@
+﻿@model cpj.portal.Models.ProcessosViewModel
+
+@{
+    ViewData["Title"] = "Visualizar";
+    ViewData["exibeHeader"] = "n";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!-- Barra de botões-->
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <form id="sign_up" method="POST">
+                    <div class="row">
+                        <div class="col-xs-2">
+                            <a class="btn bg-indigo waves-effect" asp-action="Index">Voltar</a>
+                        </div>
+                        <div class="col-xs-8"></div>
+                        <div class="col-xs-2">
+
+                            @if (!Model.Favoritado.HasValue || !Model.Favoritado.Value)
+                            {
+                                <a href="@Url.Content("~/Processos/Favoritar?id=" + Model.ID)" class="btn breadcrumb-bg-amber waves-effect" style="float: right;color:#000">
+                                    <span><i class="material-icons" style="top: 5px;right: 3px;">star</i><b>Favoritar</b></span>
+                                </a>
+                            }
+                            else
+                            {
+                                <a href="@Url.Content("~/Processos/Favoritar?id="+Model.ID)" class="btn breadcrumb-bg-pink waves-effect" style="float: right;color:#000">
+                                    <span><i class="material-icons" style="top: 5px;right: 3px;">star</i><b>Remover</b></span>
+                                </a>
+                            }
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #END# Barra de botões -->
+<!-- Basic Table informações gerais-->
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2>
+                    Dados do processo
+                    <small>Informações principais sobre o processo. </small>
+                </h2>
+            </div>
+            <div class="body">
+                <div class="row clearfix">
+                    <div class="col-lg-1 col-md-1 col-sm-6 col-xs-6">
+                        <p class="col-teal">Número:</p>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                        <p>@Model.Numero</p>
+                    </div>
+                    <div class="col-lg-1 col-md-1 col-sm-6 col-xs-6">
+                        <p class="col-teal">Data:</p>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                        <p>@Model.DataCadastro.DateTime.ToShortDateString()</p>
+                    </div>
+                    <div class="col-lg-1 col-md-1 col-sm-6 col-xs-6">
+                        <p class="col-teal">Valor:</p>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                        <p>@Model.Valor</p>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-lg-1 col-md-1 col-sm-6 col-xs-6">
+                        <p class="col-teal">Juiz:</p>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                        <p>@Model.NomeJuiz</p>
+                    </div>
+                    <div class="col-lg-1 col-md-1 col-sm-6 col-xs-6">
+                        <p class="col-teal">Assuntos:</p>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                        <p>@Model.OutrosAssuntos</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #END# Basic Table informações gerais-->
+@*Colunas para partes do processo*@
+<div class="row clearfix">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+        <div class="card" style="max-height: 200px;min-height: 200px;">
+            <div class="header">
+                <h2>
+                    Requerente
+                    <small>Refere-se a quem iniciou o processo. </small>
+                </h2>
+            </div>
+            <div class="body">
+                <div class="row clearfix">
+                    <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6">
+                        <p>@Model.Requerente</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+        <div class="card" style="max-height: 200px;min-height: 200px;">
+            <div class="header">
+                <h2>
+                    Requerido
+                    <small>Refere-se ao réu.</small>
+                </h2>
+            </div>
+            <div class="body">
+                <div class="row clearfix">
+                    <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6">
+                        <p>@Model.Requerido</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Basic Table informações movimentações-->
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2>
+                    Movimentações
+                    <small>Representa as alterações no processo. </small>
+                </h2>
+            </div>
+            @if (Model.Movimentacoes != null && Model.Movimentacoes.Count > 0)
+            {
+                <div class="body table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Descrição</th>
+                                <th>Data</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var item in Model.Movimentacoes)
+                            {
+                                <tr style="cursor:pointer">
+                                    <th scope="row"> @Html.DisplayFor(modelItem => item.Id)</th>
+                                    <td> @Html.DisplayFor(modelItem => item.Descricao)</td>
+                                    <td> @item.Data.DateTime.ToShortDateString()</td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<!-- #END# Basic Table movimentações-->
+<!-- Basic Table informações movimentações-->
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2>
+                    Petições
+                    <small>Lista de diversas petições referentes ao processo. </small>
+                </h2>
+            </div>
+            @if (Model.Peticoes != null && Model.Peticoes.Count > 0)
+            {
+                <div class="body table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Tipo</th>
+                                <th>Data</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var item in Model.Peticoes)
+                            {
+                                <tr style="cursor:pointer">
+                                    <th scope="row"> @Html.DisplayFor(modelItem => item.Id)</th>
+                                    <td> @Html.DisplayFor(modelItem => item.Tipo)</td>
+                                    <td> @item.Data.DateTime.ToShortDateString()</td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<!-- #END# Basic Table movimentações-->
+<!-- Basic Table informações de incidentes-->
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2>
+                    Incidentes
+                    <small>
+                        Incidentes, ações incidentais, recursos e execuções de sentenças.
+                    </small>
+                </h2>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #END# Basic informações de incidentes-->
+<!-- Basic Table informações de Apensos-->
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2>
+                    Apensos
+                    <small>
+                        Apensos, Entranhados e Unificados.
+                    </small>
+                </h2>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #END# Basic informações de Apensos-->
+<!-- Basic Table informações de Audiências-->
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2>
+                    Audiências
+                    <small>
+                        Informações de audiências vinculadas a este processo.
+                    </small>
+                </h2>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #END# Basic informações de Audiências-->
+@*<div>
+        <h4>ProcessosViewModel</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ID)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ID)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Numero)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Numero)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Requerido)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Requerido)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Valor)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Valor)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+        <a asp-action="Index">Back to List</a>
+    </div>*@

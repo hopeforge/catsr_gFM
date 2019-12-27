@@ -1,0 +1,9 @@
+create table Conta(
+    'Id' int PRIMARY KEY AUTO_INCREMENT,
+    'Login' varchar(25) not null,
+    'Senha' varchar(25) not null,
+    'UsuarioId' int,
+    'PortalId' int,
+    FOREIGN KEY (UsuarioId) REFERENCES Usuario(Id),
+    FOREIGN KEY (PortalId) REFERENCES Portal(Id)
+)

@@ -1,0 +1,6 @@
+CREATE TABLE `catsr_cpj`.`Usuario` (
+  `Id` INT NOT NULL AUTO_INCREMENT,
+  `Nome` VARCHAR(25) NOT NULL,
+  `Senha` VARCHAR(25) NOT NULL,
+  `Email` VARCHAR(25) NOT NULL,
+  PRIMARY KEY (`Id`));

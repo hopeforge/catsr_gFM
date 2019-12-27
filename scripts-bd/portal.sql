@@ -1,0 +1,6 @@
+
+CREATE TABLE `catsr_cpj`.`Portal` (
+  `Id` INT NOT NULL AUTO_INCREMENT,
+  `Url` VARCHAR(255) NOT NULL,
+  `Descricao` VARCHAR(25) NOT NULL,
+  PRIMARY KEY (`Id`));

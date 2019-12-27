@@ -1,0 +1,247 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>@ViewData["Title"] | CPJ | Sistema de consulta de processos judiciais</title>
+    <!-- Favicon-->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+
+    <!-- Bootstrap Core Css -->
+    <link href="~/plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Waves Effect Css -->
+    <link href="~/plugins/node-waves/waves.css" rel="stylesheet" />
+    
+
+    <!-- Animation Css -->
+    <link href="~/plugins/animate-css/animate.css" rel="stylesheet" />
+
+    <!-- Morris Css -->
+    <link href="~/plugins/morrisjs/morris.css" rel="stylesheet" />
+
+    <!-- Custom Css -->
+    <link href="~/css/style.css" rel="stylesheet">
+
+    <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
+    <link href="~/css/themes/all-themes.css" rel="stylesheet" />
+    <style>
+        @@media (max-width: 1169px) and (min-width: 992px) {
+            .logoHeader {
+                margin-left: 23px !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="theme-indigo">
+    <!-- Page Loader -->
+    <div class="page-loader-wrapper">
+        <div class="loader">
+            <div class="preloader">
+                <div class="spinner-layer pl-red">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </div>
+            <p>Por favor aguarde...</p>
+        </div>
+    </div>
+    <!-- #END# Page Loader -->
+    <!-- Overlay For Sidebars -->
+    <div class="overlay"></div>
+    <!-- #END# Overlay For Sidebars -->
+    @if (ViewData["ExibeBusca"] != null && Convert.ToInt32(ViewData["ExibeBusca"]) == 1)
+    {
+        <!-- Search Bar -->
+        <div class="search-bar">
+            <div class="search-icon">
+                <i class="material-icons">search</i>
+            </div>
+            <input type="text" placeholder="Pesquisar...">
+            <div class="close-search">
+                <i class="material-icons">close</i>
+            </div>
+        </div>
+        <!-- #END# Search Bar -->
+    }
+
+    <!-- Top Bar -->
+    <nav class="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
+                <a href="javascript:void(0);" class="bars"></a>
+                <img src="@Url.Content("~/images/cpjquadrado.png")" style="height:78px;float:left;margin-top:-11px;margin-bottom:-20px" class="navbar-brand" />
+                <a class="navbar-brand" href="index.html" style="margin-left: -10px !important;">
+                    - Consulta de Processos Judiciais
+                </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    @if (ViewData["ExibeBusca"] != null && Convert.ToInt32(ViewData["ExibeBusca"]) == 1)
+                    {
+                        <!-- Call Search -->
+                        <li><a href="javascript:void(0);" class="js-search" data-close="true"><i class="material-icons">search</i></a></li>
+                    }
+                    <!-- #END# Call Search -->
+                    <li class="pull-right"><a href="javascript:void(0);" class="js-right-sidebar" data-close="true"><i class="material-icons">more_vert</i></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- #Top Bar -->
+    <section>
+        <!-- Left Sidebar -->
+        <aside id="leftsidebar" class="sidebar">
+            <!-- User Info -->
+            <div class="user-info">
+                <div class="image">
+                    <img src="~/images/user.png" width="48" height="48" alt="User" />
+                </div>
+                <div class="info-container">
+                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="usuarioLogado"></div>
+                    <div class="email" id="usuarioEmail"></div>
+                    <div class="btn-group user-helper-dropdown">
+                        <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
+                        <ul class="dropdown-menu pull-right">
+                            <li onclick="sessionStorage.clear();"><a href="@Url.Content("~/Acesso/Index")"><i class="material-icons">input</i>Sair</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- #User Info -->
+            <!-- Menu -->
+            <div class="menu">
+                <ul class="list">
+                    <li class="header">Menu de navegação</li>
+                    <li rota="Dashboard" class="active">
+                        <a href="@Url.Content("~/Dashboard/Index")">
+                            <i class="material-icons">home</i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li rota="Processos">
+                        <a href="@Url.Content("~/Processos/Index")">
+                            <i class="material-icons">list</i>
+                            <span>Processos</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">settings</i>
+                            <span>Configurações</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li rota="Geral">
+                                <a onclick="window.location.href = '@Url.Content("~/Configuracao/Geral?id=")' + sessionStorage['usuarioId']" href="#">
+                                    <span>Geral</span>
+                                </a>
+                            </li>
+                            <li rota="Contas">
+                                <a onclick="window.location.href = '@Url.Content("~/Conta/Index?id=")' + sessionStorage['usuarioId']" href="#">
+                                    <span>Contas</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- #Menu -->
+            <!-- Footer -->
+            <div class="legal">
+                <div class="copyright">
+                    <a href="https://www.indracompany.com/es" target="_blank">HACKATHON INDRA</a>
+                    <a href="https://graacc.org.br/" target="_blank"> + GRAACC</a>.
+                    <br />
+                    &copy; 2019 - 2020 <br />
+
+                </div>
+                <div class="version">
+                    <b>Version: </b> 1.0.0
+                </div>
+            </div>
+            <!-- #Footer -->
+        </aside>
+        <!-- #END# Left Sidebar -->
+        <!-- Right Sidebar -->
+        @Html.Partial("_TemasPartial")
+        <!-- #END# Right Sidebar -->
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            @if (@ViewData["exibeHeader"] == null || @ViewData["exibeHeader"] == "s")
+            {
+                <div class="block-header">
+                    <h2>@ViewData["Title"]</h2>
+                </div>
+            }
+
+            @RenderBody()
+
+        </div>
+    </section>
+
+    <!-- Jquery Core Js -->
+    <script src="~/plugins/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core Js -->
+    <script src="~/plugins/bootstrap/js/bootstrap.js"></script>
+
+    <!-- Select Plugin Js -->
+    <script src="~/plugins/bootstrap-select/js/bootstrap-select.js"></script>
+
+    <!-- Slimscroll Plugin Js -->
+    <script src="~/plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+
+    <script src="~/plugins/bootstrap-notify/bootstrap-notify.js"></script>
+
+    <!-- Waves Effect Plugin Js -->
+    <script src="~/plugins/node-waves/waves.js"></script>
+
+    <!-- Morris Plugin Js -->
+    <script src="~/plugins/raphael/raphael.js"></script>
+    <script src="~/plugins/morrisjs/morris.js"></script>
+
+
+    <!-- Custom Js -->
+    <script src="~/js/admin.js"></script>
+
+    <script src="~/js/pages/ui/notifications.js"></script>
+
+
+    <!-- Demo Js -->
+    <script src="~/js/demo.js"></script>
+    <script>
+        $('body').attr('class','theme-'+ localStorage["tema"])
+        $(".demo-choose-skin li").click(function () {
+            localStorage.setItem("tema", $(this).find("div").attr("class"))
+        });
+
+        $(".demo-choose-skin li[class*='active']").removeClass('active');
+        $(".demo-choose-skin li[data-theme*='" + localStorage["tema"] + "']").addClass('active');
+
+        $(".menu ul li[class*='active']").removeClass('active');
+        $(".menu ul li[rota*='" + '@ViewData["Title"]' + "']").addClass('active');
+        if ('@ViewData["Title"]' == 'Geral' || '@ViewData["Title"]' == 'Contas')
+            $('.ml-menu').attr('style', 'display: block')
+
+        $('#usuarioLogado').val('').append(sessionStorage["usuarioLogado"]);
+        $('#usuarioEmail').val('').append(sessionStorage["usuarioEmail"]);
+    </script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+
+</html>
